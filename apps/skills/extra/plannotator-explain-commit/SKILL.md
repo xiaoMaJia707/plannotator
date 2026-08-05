@@ -40,6 +40,29 @@ it if it clarifies the "why".
 
 **Write every finding's `description` and `reasoning` field in 中文 (Simplified Chinese).** Keep code identifiers, file paths, line numbers, and quoted commit-message excerpts verbatim in their original language. The three fixed sub-section headers (**What.** / **Why.** / **Assumptions.**) may stay in English so the review UI's structural parsing is stable, but the prose that follows each header is Chinese. The `summary.correctness` field also stays a fixed English token (`"Explanation"`) — that value is machine-consumed.
 
+## Plain writing — mandatory
+
+The entire point of these annotations is to make code **easier** for a human
+reviewer to understand. A comment that is itself hard to read fails that
+goal. So write plainly:
+
+- **Use everyday words.** Prefer the simple word over the fancy one: 用
+  "因为" 不用 "鉴于"；用 "改成" 不用 "重构为"；用 "会出错" 不用 "存在异常隐患"。
+- **Short sentences.** One idea per sentence. Split a long sentence into two.
+  Aim for sentences a reader understands on the first pass, no re-reading.
+- **No nested clauses.** Avoid sentences with multiple 从句 / 定语堆叠. If you
+  wrote a sentence with three commas and a 破折号, break it up.
+- **Concrete over abstract.** Say what actually happens ("这里没检查 `x` 是不是
+  空，空的时候第 47 行会抛错") instead of vague abstraction ("此处存在潜在的
+  健壮性风险").
+- **Lead with the point.** State the takeaway first, then the detail. Don't
+  make the reader wade through setup to reach what matters.
+- **Plain ≠ vague.** Keep every technical fact, file path, line number, and
+  symbol name exact. Simplify the *sentences*, never drop the *substance*.
+
+Rule of thumb: if a junior engineer new to this codebase couldn't understand
+the comment on one read, rewrite it simpler.
+
 ## Method
 
 1. **Read the commit message.** Extract the stated purpose. Note whether the
